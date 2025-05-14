@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráfico Interativo da Profecia das 70 Semanas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    .timeline {
+      position: relative;
+      margin: 50px auto;
+      width: 900px;
+      height: 250px;
+    }
+    .line {
+      position: absolute;
+      top: 120px;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: #2c3e50;
+    }
+    .event {
+      position: absolute;
+      top: 100px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .event span {
+      display: block;
+      font-size: 14px;
+      margin-top: 10px;
+      color: #2c3e50;
+    }
+    .event::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      width: 6px;
+      height: 26px;
+      background: #2c3e50;
+      transform: translateX(-50%);
+    }
+    .tooltip {
+      display: none;
+      position: absolute;
+      background: #34495e;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      width: 200px;
+      z-index: 10;
+    }
+    .event:hover .tooltip {
+      display: block;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    #e1 { left: 0; }
+    #e2 { left: 120px; }
+    #e3 { left: 650px; }
+    #e4 { left: 750px; }
+    #e5 { left: 850px; }
+    @media (max-width: 900px) {
+      .timeline { width: 100%; }
+      .event span { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <h2>Profecia das 70 Semanas (Daniel 9:24-27)</h2>
+  <div class="timeline">
+    <div class="line"></div>
+    <div class="event" id="e1">
+      <span>457 a.C.<br>Decreto de Artaxerxes</span>
+      <div class="tooltip">Início da profecia: Artaxerxes autoriza a reconstrução de Jerusalém (Esdras 7:12-26).</div>
+    </div>
+    <div class="event" id="e2">
+      <span>408 a.C.<br>Fim da Reconstrução</span>
+      <div class="tooltip">7 semanas (49 anos): Jerusalém é reconstruída em tempos difíceis (Neemias).</div>
+    </div>
+    <div class="event" id="e3">
+      <span>27 d.C.<br>Batismo de Jesus</span>
+      <div class="tooltip">69 semanas (483 anos): Início do ministério de Jesus, o Messias (Lucas 3:21-23).</div>
+    </div>
+    <div class="event" id="e4">
+      <span>31 d.C.<br>Crucificação</span>
+      <div class="tooltip">Metade da 70ª semana: Jesus é "cortado" na cruz, confirmando a nova aliança (Hebreus 10:12).</div>
+    </div>
+    <div class="event" id="e5">
+      <span>70 d.C.<br>Destruição de Jerusalém</span>
+      <div class="tooltip">Evento posterior: Romanos destroem o templo, cumprindo a profecia (Mateus 24:2).</div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const events = document.querySelectorAll('.event');
+        if (events.length === 0) {
+          console.error('Erro: Nenhum elemento .event encontrado no DOM.');
+          return;
+        }
+        events.forEach(event => {
+          event.addEventListener('mouseover', () => {
+            const tooltip = event.querySelector('.tooltip');
+            if (tooltip) {
+              tooltip.style.top = '-60px';
+              tooltip.style.left = '50%';
+              tooltip.style.transform = 'translateX(-50%)';
+            }
+          });
+          event.addEventListener('mouseout', () => {
+            const tooltip = event.querySelector('.tooltip');
+            if (tooltip) {
+              tooltip.style.display = 'none';
+            }
+          });
+        });
+        console.log('Gráfico interativo carregado com sucesso!');
+      } catch (error) {
+        console.error('Erro ao inicializar o gráfico:', error);
+      }
+    });
+  </script>
+</body>
+</html>
